@@ -21,4 +21,3 @@ Data, one folder per part:
 Notes / what didn't work:
 - For Part 3 I used type 2 diabetes instead of Alzheimer's (disease choice was open). I first tried rheumatoid arthritis, but the only proteomics table I found had 168 proteins, which left too few genes after the join.
 - The T2D join is limited to 1,024 genes by the plasma protein panel (~1,460 proteins), so some well-known T2D genes (PPARG, TCF7L2, SLC30A8, KCNJ11) drop out. This is discussed in the report.
-- The notebook's opening cell still describes Part 3 as Alzheimer's; the Part 3 cells themselves are T2D.
