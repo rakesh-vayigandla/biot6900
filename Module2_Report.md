@@ -92,3 +92,9 @@ Further limitations are the small T2D islet group (19 donors), the use of organ 
 ## 5. Conclusion
 
 Integrating islet transcriptomics, plasma proteomics and GWAS nominated LPL as the top T2D target and highlighted the SLIT-ROBO pathway as an under-studied candidate. The weak RNA-protein agreement and the many known genes lost at the join show that, with unmatched data, the choice of cohorts and tissues shapes the result as much as the scoring method does.
+
+## References
+
+1. Solimena M, Schulte AM, Marselli L, et al. Systems biology of the IMIDIA biobank from organ donors and pancreatectomised patients defines a novel transcriptomic signature of islets from individuals with type 2 diabetes. *Diabetologia*. 2018;61(3):641-657. doi:10.1007/s00125-017-4500-3. Data: NCBI GEO accession GSE76894.
+2. Gadd DA, Hillary RF, Kuncheva Z, et al. Blood protein assessment of leading incident diseases and mortality in the UK Biobank. *Nature Aging*. 2024;4(7):939-948. doi:10.1038/s43587-024-00655-7.
+3. Buniello A, Suveges D, Cruz-Castillo C, et al. Open Targets Platform: facilitating therapeutic hypotheses building in drug discovery. *Nucleic Acids Research*. 2025;53(D1):D1467-D1475. doi:10.1093/nar/gkae1128. Data: type 2 diabetes mellitus (MONDO_0005148), accessed 24 September 2026.
