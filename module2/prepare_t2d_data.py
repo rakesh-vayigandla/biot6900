@@ -13,7 +13,7 @@ Writes to data/part3_t2d/:
   t2d_protein.tsv  gene, log2hr, pval    (log2 hazard ratio per SD of plasma protein)
   t2d_gwas.tsv     gene, gwas_score      (0-1; genes absent here have no GWAS evidence)
 
-Run from the repo root:  python prepare_t2d_data.py
+Run from the module2/ folder:  python prepare_t2d_data.py
 (needs openpyxl for the protein table:  pip install openpyxl)
 """
 import gzip
