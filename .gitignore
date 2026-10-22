@@ -3,3 +3,7 @@
 module2/data/part3_t2d/raw/
 # instructor answer key: keep out of the repo
 module3/BIOT6900_Module3_Assignment_KEY.ipynb
+# downloaded structures and fpocket output (Module 4): rebuilt by the notebook
+module4/structures/
+# MyVariant.info cache (Module 5): rebuilt by the notebook
+module5/data/

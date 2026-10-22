@@ -9,7 +9,8 @@ Each module has its own folder. Notebooks use paths relative to their own folder
 module1/   setup notebook
 module2/   multi-omics target identification (T2D)
 module3/   target triage with protein language models (T2D)
-module4/   structure prediction and pocket assessment (in progress)
+module4/   structure-based druggability (T2D)
+module5/   variant interpretation (CYP2C19)
 ```
 
 ## Module 1
@@ -44,3 +45,28 @@ Notes:
 - Input is my Module 2 file, read from `../module2/targets_t2d.csv`. It already uses `gene` and `score` columns, so no renaming was needed. The only change to the provided settings is that `TARGETS_FILE` path.
 - All 15 top targets mapped to the proteome, so there were no unmapped genes. CRH was in the training panel and was removed before fitting (leakage guard).
 - I added one extra cell after Step 4 that validates the small-molecule and antibody priors separately with the family split.
+
+## Module 4: Structure-based druggability
+Disease: type 2 diabetes. Targets: **LPL** (P06858, Module 2 rank 1) and **CTSZ** (Q9UBR2, Module 2 rank 15), the two targets the Module 3 report sent forward to Week 4.
+- `module4/BIOT6900_Module4_Assignment.ipynb`: assignment notebook (Steps 1 to 7). Runs top to bottom with Restart & Run All.
+- `module4/BIOT6900_Module4_Part1_ToyModel.ipynb`, `BIOT6900_Module4_Part2_RealData_1.ipynb`, `BIOT6900_Module4_Demo_DrugPocket.ipynb`: lab notebooks (Step 8 p53 numbers come from Part 2).
+- `module4/Module4_Report.pdf`: written report (`Module4_Report.md` is the editable source).
+- `module4/structure_assessment_t2d.csv`: summary table with the druggability calls.
+- `module4/figures/`: plots from the notebook used in the report.
+
+Notes:
+- Experimental structures: LPL 6OB0 chain A (LPL-GPIHBP1 complex with a bound small molecule); CTSZ 1DEU chain A (procathepsin X, no small-molecule ligand, so the ligand-site check applies to LPL only).
+- `module4/structures/` (AlphaFold models, PDB files, fpocket output) is not committed; the notebook downloads everything again.
+- fpocket was installed into the biot6900 env with `conda install -c conda-forge fpocket`. If the notebook says fpocket is not found, make sure the kernel is the biot6900 env (its `bin/` must be on PATH).
+
+## Module 5: Variant interpretation
+Gene: **CYP2C19**. I was not assigned a gene on the allocation list, so I chose CYP2C19 myself.
+- `module5/BIOT6900_Module5_Part3_Assignment.ipynb`: assignment notebook (Q1 to Q6). Runs top to bottom with Restart & Run All.
+- `module5/Module5_Report.pdf`: written report (`Module5_Report.md` is the editable source).
+- `module5/pgx_classified_CYP2C19.csv`: the 33 VUS with their CADD band, evidence and provisional call.
+
+Notes / what didn't work:
+- **AlphaGenome Atlas: not run.** I did not have an API key, so `SKIP_ATLAS = True`; the Atlas part of the report is answered from reasoning.
+- **Calibration:** CYP2C19 has no P/LP variants in ClinVar, so CADD cannot be calibrated on it alone. I pooled it with DPYD (fetched and cached the same way); 130 of the 135 labelled variants in the pooled calibration come from DPYD, which the report discusses.
+- `module5/data/` (MyVariant.info cache) is not committed; the notebook re-downloads it.
+- The template's text cells had cell type `md`, which Jupyter rejects as invalid, so I changed them to `markdown` to make the notebook run. No text was changed.
