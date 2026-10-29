@@ -7,3 +7,10 @@ module3/BIOT6900_Module3_Assignment_KEY.ipynb
 module4/structures/
 # MyVariant.info cache (Module 5): rebuilt by the notebook
 module5/data/
+# Module 6 data pack from Canvas
+module6/data/
+# Module 7 Neo4j credentials (never commit)
+module7/neo4j_credentials.txt
+module7/Neo4j-*.txt
+# Module 6 T2D extra: raw VCF extraction (large, rebuilt by build_t2d_prs.py)
+module6/t2d_extra/raw/

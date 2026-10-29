@@ -11,6 +11,8 @@ module2/   multi-omics target identification (T2D)
 module3/   target triage with protein language models (T2D)
 module4/   structure-based druggability (T2D)
 module5/   variant interpretation (CYP2C19)
+module6/   polygenic risk score portability (Alzheimer's PGS000334)
+portfolio1/ Portfolio Deliverable 1: T2D multi-omics target discovery package (Labs 2-4)
 ```
 
 ## Module 1
@@ -70,3 +72,22 @@ Notes / what didn't work:
 - **Calibration:** CYP2C19 has no P/LP variants in ClinVar, so CADD cannot be calibrated on it alone. I pooled it with DPYD (fetched and cached the same way); 130 of the 135 labelled variants in the pooled calibration come from DPYD, which the report discusses.
 - `module5/data/` (MyVariant.info cache) is not committed; the notebook re-downloads it.
 - The template's text cells had cell type `md`, which Jupyter rejects as invalid, so I changed them to `markdown` to make the notebook run. No text was changed.
+
+## Module 6: PRS portability across ancestries
+Score: PGS Catalog **PGS000334** (22-SNP Alzheimer's score, provided with the course data), applied to 2,336 people from 1000 Genomes phase 3.
+- `module6/BIOT6900_Module6_Part3_Graded_Starter.ipynb`: graded notebook. `USE_DEMO = False`; Section 2 shows `source: REAL` with the file checksums. Runs top to bottom with Restart & Run All.
+- `module6/Module6_Report.pdf`: written report, including the proof-of-data block (`Module6_Report.md` is the editable source).
+- `module6/figures/`: PRS distribution by ancestry and calibration by ancestry.
+- `module6/BIOT6900_Module6_Toy_PRS.ipynb`, `BIOT6900_Module6_Part2_RealPRS.ipynb`: lab Parts 1 and 2.
+
+Notes:
+- The phenotype in this cohort is simulated (1000 Genomes has no disease labels), so AUC and calibration are illustrative.
+- My earlier modules used type 2 diabetes, but the genotype file contains only the 22 Alzheimer's score SNPs and the phenotype was simulated from that score, so I used the provided Alzheimer's score rather than a T2D one.
+- `module6/data/` (the Canvas data pack) is not committed.
+- **Extra, not graded (`module6/t2d_extra/`):** my Part I disease is T2D, so I also ran the distribution analysis on two real PGS Catalog T2D scores (PGS003733 EUR-derived, PGS003735 AFR-derived), extracting the 287 genotypes they need straight from the 1000 Genomes VCFs for the same 2,336 people. There is no T2D phenotype for 1000 Genomes, so it reports the PRS distribution only, with no AUC. See the appendix of the report, `t2d_extra/build_t2d_prs.py` and `t2d_extra/t2d_prs_by_ancestry.csv`. The raw VCF extract (`t2d_extra/raw/`) is not committed.
+
+## Portfolio Deliverable 1: Multi-omics target discovery package
+Disease: type 2 diabetes (the same disease as Modules 2-4). A 6-page synthesis of Labs 2-4, ending in a ranked target shortlist (LPL, CSF1, IL17RB, CTSZ).
+- `portfolio1/Portfolio1_T2D_Target_Package.pdf`: the package (`.md` is the editable source).
+- `portfolio1/figures/`: Venn diagram of layer coverage, multi-omics integration plot, and AlphaFold structure figure with pockets. These were re-plotted from the committed Lab 2 tables and Lab 4 AlphaFold/fpocket outputs; no new analysis.
+- Underlying work: `module2/` (ranked table `targets_t2d.csv`), `module3/`, `module4/`.
