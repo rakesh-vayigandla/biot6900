@@ -1,0 +1,85 @@
+src,rel,dst,pvalue,source,confidence,neg_log10_p
+CSF1,ASSOCIATED_WITH,Type 2 diabetes,1e-14,Open Targets GWAS credible set,high,14.0
+IL17RB,ASSOCIATED_WITH,Type 2 diabetes,8.2e-09,Open Targets GWAS credible set,high,8.1
+LPL,ASSOCIATED_WITH,Type 2 diabetes,2e-21,Open Targets GWAS credible set,high,20.7
+CRH,ASSOCIATED_WITH,Type 2 diabetes,2.2e-08,Open Targets GWAS credible set,high,7.7
+NPY,ASSOCIATED_WITH,Type 2 diabetes,1e-11,Open Targets GWAS credible set,high,11.0
+ROBO1,ASSOCIATED_WITH,Type 2 diabetes,1e-08,Open Targets GWAS credible set,high,8.0
+BAIAP2,ASSOCIATED_WITH,Type 2 diabetes,2.6e-09,Open Targets GWAS credible set,high,8.6
+IFNLR1,ASSOCIATED_WITH,Type 2 diabetes,2e-13,Open Targets GWAS credible set,high,12.7
+PAMR1,ASSOCIATED_WITH,Type 2 diabetes,6.8e-06,Open Targets GWAS credible set,suggestive,5.2
+SLIT2,ASSOCIATED_WITH,Type 2 diabetes,6e-09,Open Targets GWAS credible set,high,8.2
+TNFRSF11A,ASSOCIATED_WITH,Type 2 diabetes,2e-21,Open Targets GWAS credible set,high,20.7
+CTSZ,ASSOCIATED_WITH,Type 2 diabetes,5e-14,Open Targets GWAS credible set,high,13.3
+PCDH17,ASSOCIATED_WITH,Type 2 diabetes,7e-17,Open Targets GWAS credible set,high,16.2
+MUC13,ASSOCIATED_WITH,Type 2 diabetes,5.7e-09,Open Targets GWAS credible set,high,8.2
+APBB1IP,ASSOCIATED_WITH,Type 2 diabetes,8e-13,Open Targets GWAS credible set,high,12.1
+DPP4,ASSOCIATED_WITH,Type 2 diabetes,,Open Targets clinical precedence (drug target),"low (pharmacology, no GWAS)",
+SLC5A2,ASSOCIATED_WITH,Type 2 diabetes,,Open Targets clinical precedence (drug target),"low (pharmacology, no GWAS)",
+KCNJ11,ASSOCIATED_WITH,Type 2 diabetes,1e-107,Open Targets GWAS credible set,high,107.0
+ABCC8,ASSOCIATED_WITH,Type 2 diabetes,1e-107,Open Targets GWAS credible set,high,107.0
+GLP1R,ASSOCIATED_WITH,Type 2 diabetes,4.7e-22,Open Targets GWAS credible set,high,21.3
+INSR,ASSOCIATED_WITH,Type 2 diabetes,3e-14,Open Targets GWAS credible set,high,13.5
+PPARG,ASSOCIATED_WITH,Type 2 diabetes,3e-78,Open Targets GWAS credible set,high,77.5
+Type 2 diabetes,HAS_PHENOTYPE,Insulin resistance,,HPO via Open Targets,high,
+Type 2 diabetes,HAS_PHENOTYPE,Increased waist to hip ratio,,HPO via Open Targets,high,
+Type 2 diabetes,HAS_PHENOTYPE,Hyperglycemia,,"HPO term, curated from the clinical definition",medium,
+Type 2 diabetes,HAS_PHENOTYPE,Obesity,,"HPO term, curated from the clinical definition",medium,
+Type 2 diabetes,HAS_PHENOTYPE,Hypertriglyceridemia,,"HPO term, curated from the clinical definition",medium,
+KCNJ11,PARTICIPATES_IN,Regulation of insulin secretion,,Reactome via Open Targets,high (curated),
+ABCC8,PARTICIPATES_IN,Regulation of insulin secretion,,Reactome via Open Targets,high (curated),
+GLP1R,PARTICIPATES_IN,Glucagon-like Peptide-1 (GLP1) regulates insulin secretion,,Reactome via Open Targets,high (curated),
+DPP4,PARTICIPATES_IN,"Synthesis, secretion, and inactivation of Glucagon-like Peptide-1 (GLP-1)",,Reactome via Open Targets,high (curated),
+CRH,PARTICIPATES_IN,G alpha (s) signalling events,,Reactome via Open Targets,high (curated),
+GLP1R,PARTICIPATES_IN,G alpha (s) signalling events,,Reactome via Open Targets,high (curated),
+NPY,PARTICIPATES_IN,G alpha (i) signalling events,,Reactome via Open Targets,high (curated),
+INSR,PARTICIPATES_IN,Signaling by Insulin receptor,,Reactome via Open Targets,high (curated),
+SLC5A2,PARTICIPATES_IN,Cellular hexose transport,,Reactome via Open Targets,high (curated),
+LPL,PARTICIPATES_IN,Transcriptional regulation of white adipocyte differentiation,,Reactome via Open Targets,high (curated),
+PPARG,PARTICIPATES_IN,Transcriptional regulation of white adipocyte differentiation,,Reactome via Open Targets,high (curated),
+LPL,PARTICIPATES_IN,Chylomicron remodeling,,Reactome via Open Targets,high (curated),
+CSF1,PARTICIPATES_IN,Other interleukin signaling,,Reactome via Open Targets,high (curated),
+IFNLR1,PARTICIPATES_IN,Other interleukin signaling,,Reactome via Open Targets,high (curated),
+IL17RB,PARTICIPATES_IN,Interleukin-17 signaling,,Reactome via Open Targets,high (curated),
+TNFRSF11A,PARTICIPATES_IN,TNFR2 non-canonical NF-kB pathway,,Reactome via Open Targets,high (curated),
+CTSZ,PARTICIPATES_IN,Neutrophil degranulation,,Reactome via Open Targets,high (curated),
+ROBO1,PARTICIPATES_IN,Signaling by ROBO receptors,,Reactome via Open Targets,high (curated),
+SLIT2,PARTICIPATES_IN,Signaling by ROBO receptors,,Reactome via Open Targets,high (curated),
+BAIAP2,PARTICIPATES_IN,RAC1 GTPase cycle,,Reactome via Open Targets,high (curated),
+APBB1IP,PARTICIPATES_IN,Integrin signaling,,Reactome via Open Targets,high (curated),
+MUC13,PARTICIPATES_IN,O-linked glycosylation of mucins,,Reactome via Open Targets,high (curated),
+Sitagliptin,TARGETS,DPP4,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Empagliflozin,TARGETS,SLC5A2,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Dapagliflozin,TARGETS,SLC5A2,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Glimepiride,TARGETS,ABCC8,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Glimepiride,TARGETS,KCNJ11,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Semaglutide,TARGETS,GLP1R,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Liraglutide,TARGETS,GLP1R,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Insulin glargine,TARGETS,INSR,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+Pioglitazone,TARGETS,PPARG,,ChEMBL mechanism of action via Open Targets,high (approved drug),
+rs12721515,OCCURS_IN,CSF1,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs3796349,OCCURS_IN,IL17RB,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs17091891,OCCURS_IN,LPL,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs11337932,OCCURS_IN,CRH,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs2188848,OCCURS_IN,NPY,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs10511124,OCCURS_IN,ROBO1,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs72634326,OCCURS_IN,BAIAP2,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs78312791,OCCURS_IN,IFNLR1,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs7942287,OCCURS_IN,PAMR1,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs2046438,OCCURS_IN,SLIT2,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs11877530,OCCURS_IN,TNFRSF11A,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs911300,OCCURS_IN,CTSZ,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs11148426,OCCURS_IN,PCDH17,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs1909586,OCCURS_IN,MUC13,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs11819063,OCCURS_IN,APBB1IP,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs5215,OCCURS_IN,KCNJ11,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs9366994,OCCURS_IN,GLP1R,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs17175860,OCCURS_IN,INSR,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+rs17036160,OCCURS_IN,PPARG,,Open Targets GWAS lead variant,"medium (lead variant, not proven causal)",
+Non-alcoholic fatty liver disease,HAS_PHENOTYPE,Insulin resistance,,"HPO term, curated from the clinical definition",medium,
+Non-alcoholic fatty liver disease,HAS_PHENOTYPE,Obesity,,"HPO term, curated from the clinical definition",medium,
+Non-alcoholic fatty liver disease,HAS_PHENOTYPE,Hypertriglyceridemia,,"HPO term, curated from the clinical definition",medium,
+PNPLA3,ASSOCIATED_WITH,Non-alcoholic fatty liver disease,5.2e-128,Open Targets GWAS credible set,high,127.3
+TM6SF2,ASSOCIATED_WITH,Non-alcoholic fatty liver disease,4.1e-113,Open Targets GWAS credible set,high,112.4
+THRB,ASSOCIATED_WITH,Non-alcoholic fatty liver disease,,Open Targets clinical precedence (drug target),"low (pharmacology, no GWAS)",
+Resmetirom,TARGETS,THRB,,ChEMBL mechanism of action via Open Targets,high (approved drug),

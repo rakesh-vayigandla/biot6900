@@ -12,6 +12,7 @@ module3/   target triage with protein language models (T2D)
 module4/   structure-based druggability (T2D)
 module5/   variant interpretation (CYP2C19)
 module6/   polygenic risk score portability (Alzheimer's PGS000334)
+module7/   knowledge graph in Neo4j (T2D)
 portfolio1/ Portfolio Deliverable 1: T2D multi-omics target discovery package (Labs 2-4)
 ```
 
@@ -91,3 +92,18 @@ Disease: type 2 diabetes (the same disease as Modules 2-4). A 6-page synthesis o
 - `portfolio1/Portfolio1_T2D_Target_Package.pdf`: the package (`.md` is the editable source).
 - `portfolio1/figures/`: Venn diagram of layer coverage, multi-omics integration plot, and AlphaFold structure figure with pockets. These were re-plotted from the committed Lab 2 tables and Lab 4 AlphaFold/fpocket outputs; no new analysis.
 - Underlying work: `module2/` (ranked table `targets_t2d.csv`), `module3/`, `module4/`.
+
+## Module 7: Knowledge graph (Neo4j)
+Disease: type 2 diabetes. A **77-node, 84-relationship** graph in Neo4j AuraDB Free: 25 genes, 19 GWAS lead variants, 17 Reactome pathways, 9 approved drugs, 5 phenotypes, and 2 diseases (T2D plus non-alcoholic fatty liver disease as the related disease that shares phenotypes).
+- `module7/BIOT6900_Module7_Starter.ipynb`: assignment notebook (Parts A to E). Runs top to bottom with Restart & Run All.
+- `module7/Module7_Report.pdf`: written report (`Module7_Report.md` is the editable source).
+- `module7/my_knowledge_graph.png`: the graph coloured by node kind, with a legend.
+- `module7/nodes.csv`, `module7/edges.csv`: the node and edge tables.
+- `module7/biomarker_ranking.csv`: PageRank fused with the Module 2/3 gene evidence.
+- `module7/data/targets_t2d.csv`: the gene evidence table built from my Module 2/3 results plus Open Targets.
+
+Notes / what didn't work:
+- **Credentials are not committed.** The notebook reads them from `module7/neo4j_credentials.txt` (the Aura "Download credentials" file), which is git-ignored.
+- The AuraDB Free instance had paused itself after a few days, so the first connection attempt failed to resolve the host; resuming it in the Aura console fixed it.
+- Data sources: Open Targets (GWAS credible sets, HPO phenotypes, Reactome pathways, ChEMBL drug mechanisms), queried October 2026. Every edge carries a `source` and `confidence` property.
+- I added one extra cell after the provided visualization cell that redraws the same graph with a node-kind legend and degree-scaled nodes, and one after the PageRank cell that fuses PageRank with the gene evidence into a single ranked table.
