@@ -13,6 +13,8 @@ module4/   structure-based druggability (T2D)
 module5/   variant interpretation (CYP2C19)
 module6/   polygenic risk score portability (Alzheimer's PGS000334)
 module7/   knowledge graph in Neo4j (T2D)
+module8/   single-cell and spatial transcriptomics (lab notebooks)
+module9/   clinical NLP: signal vs leakage (DKA)
 portfolio1/ Portfolio Deliverable 1: T2D multi-omics target discovery package (Labs 2-4)
 ```
 
@@ -107,3 +109,18 @@ Notes / what didn't work:
 - The AuraDB Free instance had paused itself after a few days, so the first connection attempt failed to resolve the host; resuming it in the Aura console fixed it.
 - Data sources: Open Targets (GWAS credible sets, HPO phenotypes, Reactome pathways, ChEMBL drug mechanisms), queried October 2026. Every edge carries a `source` and `confidence` property.
 - I added one extra cell after the provided visualization cell that redraws the same graph with a node-kind legend and degree-scaled nodes, and one after the PageRank cell that fuses PageRank with the gene evidence into a single ranked table.
+
+## Module 9: Clinical NLP, signal vs leakage
+Disease: **diabetic ketoacidosis (DKA)**, an acute complication of the type 2 diabetes thread from Modules 2-7. All patients and notes are synthetic, generated inside the notebook from my configuration (`SEED = 2020300`, my student ID).
+- `module9/BIOT6900_Module9_Notebook3_Graded.ipynb`: the graded notebook, with the D1-D4 answers written in its markdown cells. Runs top to bottom with Restart & Run All.
+
+Configuration and findings:
+- **Signals (causes, documented at admission):** severe acidosis, altered mental status, precipitating infection.
+- **Consequences (interventions on deteriorating patients, my planted leakage):** pressors, intubation, comfort care.
+- **The two injected wildcards:** `lactate_not_clearing` is genuine early signal (admission note only, 1.2x enriched in those who died); `renal_replacement` is leakage (final note only, 5.7x enriched, and the single most important feature in the model).
+- **AUROC:** 0.929 with everything, 0.858 with my declared leakage removed, **0.739 with all leakage removed**. The one wildcard I had not declared cost more (-0.119) than all three declared leaks combined (-0.071).
+- Assertion check: naive keyword counting found 206 patients with severe acidosis; assertion-aware extraction found 132, so negation handling removed 74 false positives.
+
+Notes:
+- I added one cell before Part D (clearly labelled) that reports which note each concept appears in and how enriched it is by outcome. That timing evidence is what the D2 answer argues from, rather than relying on the importance plot alone.
+- Nothing failed to run.
