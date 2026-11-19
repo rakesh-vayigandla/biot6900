@@ -14,3 +14,7 @@ module7/neo4j_credentials.txt
 module7/Neo4j-*.txt
 # Module 6 T2D extra: raw VCF extraction (large, rebuilt by build_t2d_prs.py)
 module6/t2d_extra/raw/
+# Module 8: Census cache, Visium download and toy datasets (rebuilt by the notebook)
+module8/data/
+# Module 10: MedNIST, PathMNIST download and the rebuilt subset (all re-downloadable)
+module10/data/
