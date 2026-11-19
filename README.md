@@ -13,8 +13,9 @@ module4/   structure-based druggability (T2D)
 module5/   variant interpretation (CYP2C19)
 module6/   polygenic risk score portability (Alzheimer's PGS000334)
 module7/   knowledge graph in Neo4j (T2D)
-module8/   single-cell and spatial transcriptomics (lab notebooks)
+module8/   single-cell and spatial omics: HER2/ERBB2 in breast cancer
 module9/   clinical NLP: signal vs leakage (DKA)
+module10/  medical imaging AI: build it, then break it (PathMNIST)
 portfolio1/ Portfolio Deliverable 1: T2D multi-omics target discovery package (Labs 2-4)
 ```
 
@@ -72,7 +73,7 @@ Gene: **CYP2C19**. I was not assigned a gene on the allocation list, so I chose 
 
 Notes / what didn't work:
 - **AlphaGenome Atlas: not run.** I did not have an API key, so `SKIP_ATLAS = True`; the Atlas part of the report is answered from reasoning.
-- **Calibration:** CYP2C19 has no P/LP variants in ClinVar, so CADD cannot be calibrated on it alone. I pooled it with DPYD (fetched and cached the same way); 130 of the 135 labelled variants in the pooled calibration come from DPYD, which the report discusses.
+- **Calibration:** CYP2C19 has no P/LP variants in ClinVar, so CADD cannot be calibrated on it alone. I pooled it with DPYD (fetched and cached the same way); 130 of the 135 labeled variants in the pooled calibration come from DPYD, which the report discusses.
 - `module5/data/` (MyVariant.info cache) is not committed; the notebook re-downloads it.
 - The template's text cells had cell type `md`, which Jupyter rejects as invalid, so I changed them to `markdown` to make the notebook run. No text was changed.
 
@@ -99,7 +100,7 @@ Disease: type 2 diabetes (the same disease as Modules 2-4). A 6-page synthesis o
 Disease: type 2 diabetes. A **77-node, 84-relationship** graph in Neo4j AuraDB Free: 25 genes, 19 GWAS lead variants, 17 Reactome pathways, 9 approved drugs, 5 phenotypes, and 2 diseases (T2D plus non-alcoholic fatty liver disease as the related disease that shares phenotypes).
 - `module7/BIOT6900_Module7_Starter.ipynb`: assignment notebook (Parts A to E). Runs top to bottom with Restart & Run All.
 - `module7/Module7_Report.pdf`: written report (`Module7_Report.md` is the editable source).
-- `module7/my_knowledge_graph.png`: the graph coloured by node kind, with a legend.
+- `module7/my_knowledge_graph.png`: the graph colored by node kind, with a legend.
 - `module7/nodes.csv`, `module7/edges.csv`: the node and edge tables.
 - `module7/biomarker_ranking.csv`: PageRank fused with the Module 2/3 gene evidence.
 - `module7/data/targets_t2d.csv`: the gene evidence table built from my Module 2/3 results plus Open Targets.
@@ -109,6 +110,33 @@ Notes / what didn't work:
 - The AuraDB Free instance had paused itself after a few days, so the first connection attempt failed to resolve the host; resuming it in the Aura console fixed it.
 - Data sources: Open Targets (GWAS credible sets, HPO phenotypes, Reactome pathways, ChEMBL drug mechanisms), queried October 2026. Every edge carries a `source` and `confidence` property.
 - I added one extra cell after the provided visualization cell that redraws the same graph with a node-kind legend and degree-scaled nodes, and one after the PageRank cell that fuses PageRank with the gene evidence into a single ranked table.
+
+## Module 8: Single-cell and spatial omics
+
+**Name:** Rakesh Vayigandla.
+**Chosen target gene:** **ERBB2 (HER2)**.
+**Anything that did not run:** the provided starter crashed three times before it would execute: the HVG cell, `sc.pp.neighbors`, and scVI training, all in cells marked *(provided)*. All three are fixed and the notebook now runs clean with Restart & Run All; the causes and fixes are listed below. The scVI step ran on **CPU (60 epochs), not the Explorer GPU (200 epochs)**, so scVI is undertrained; this is why Harmony was chosen and it is discussed in the report.
+
+Part 1 is 10 donors / 20,000 cells from the CZ CELLxGENE Census (version 2025-11-08); Part 2 is the 10x Visium section `V1_Breast_Cancer_Block_A_Section_1`.
+- `module8/BIOT6900_Module8_Assignment_Starter.ipynb`: assignment notebook (Parts 1 and 2, all TODOs). Runs top to bottom with Restart & Run All.
+- `module8/Module8_Report.pdf`: written report for Part 3 (`Module8_Report.md` is the editable source).
+- `module8/figures/`: figures exported from the notebook run.
+- `module8/BIOT6900_Module8_SingleCell_Toy_pbmc3k.ipynb`, `BIOT6900_Module8_Spatial_Toy_Visium.ipynb`: lab notebooks.
+
+Headline result: ERBB2 is ~10.7x higher in malignant cells than in genuine T cells (0.64 vs 0.06 mean, 36.8% vs 2.5% expressing), and spatially it is highest in the epithelial-rich domains (1.65, 1.64, 1.53) and lowest in the stromal/immune pair (0.98, 1.22). Neighborhood enrichment shows an immune-excluded tumor: 35 of 36 domain pairs avoid each other, and the only above-chance interface is domains 0-1 (z = +7.9).
+
+**A bug in the provided `broad_type()` helper.** It tests `"t cell" in ct` as a substring, and the Census label `"malignant cell"` ends in `"t cell"`, so every malignant cell is silently relabeled `T` (`"mast cell"` and `"myofibroblast cell"` too). **8,526 of the 10,880 cells labeled `T` - 78% - are actually `malignant cell`.** Uncorrected, the notebook reports ERBB2 as a T-cell gene, which is the opposite of the real biology. I left `broad_type()` exactly as provided and added one clearly marked extra cell that measures the error and re-derives the labels.
+
+Integration: **Harmony was used, not scVI.** Harmony wins on both axes at once - donor mixing -0.076 vs -0.032, biology preserved 0.043 vs 0.035, combined 0.119 vs 0.068 - and converged in under a second against 60 epochs of CPU training. Caveat in the report: scVI falls back to 60 CPU epochs instead of 200 GPU epochs, so it is probably undertrained.
+
+Notes / what didn't work - **the provided starter does not run on a current package stack.** Three separate failures, all in cells the notebook marks *(provided)*:
+1. **`sc.pp.highly_variable_genes` crashed** with `ValueError: reciprocal condition number 1.159e-14`. Two donors (`pal_Patient 0056`, `pal_Patient 0178`) were sequenced on the shallower 10x 3' v2 chemistry and have only ~720 distinct mean values across ~14,600 genes, so the per-donor `seurat_v3` loess fit is singular. Fixed by passing **`span=0.5`** (scanpy's default is 0.3); `flavor`, `n_top_genes`, `layer` and `batch_key` are unchanged. Tested: 0.3 fails, 0.4-0.8 all work. **This is the only edit to any provided cell.**
+2. **`sc.pp.neighbors` crashed** with `AttributeError: 'csr_array' object has no attribute 'getnnz'`. pynndescent 0.7.0 returns a scipy sparse *array*, while scanpy 1.11.5 (already the latest) calls `.getnnz()`, which exists only on `csr_matrix`. Fixed in the environment with `pip install --no-deps "pynndescent==0.5.13"`, so no code changed. pynndescent is used only by scanpy and umap-learn, so no other module is affected.
+3. **`vae.train()` segfaulted** (SIGSEGV) on the first batch. This is OpenMP thread contention, not memory - peak RSS was 0.72 GB. Fixed by running the notebook with **`OMP_NUM_THREADS=1`**, an environment variable only, so the scVI cell is byte-identical to the template. Tested: 1 thread works, 2/4/8 all segfault.
+
+To reproduce: `OMP_NUM_THREADS=1 jupyter nbconvert --to notebook --execute --inplace BIOT6900_Module8_Assignment_Starter.ipynb` from `module8/`.
+
+Other changes, all disclosed: `TARGET` was set to `ERBB2` from the template's `EPCAM` (the template line says to choose); the 2.3 TODO cell also scores canonical tumor/stroma/immune marker panels per domain, since that TODO asks to relate the domains to those regions; and the extra labelling cell described above. The 22 markdown cells are the provided ones with the six interpretation answers filled in. `module8/data/` (Census cache and the Visium download) is not committed.
 
 ## Module 9: Clinical NLP, signal vs leakage
 Disease: **diabetic ketoacidosis (DKA)**, an acute complication of the type 2 diabetes thread from Modules 2-7. All patients and notes are synthetic, generated inside the notebook from my configuration (`SEED = 2020300`, my student ID).
@@ -122,5 +150,34 @@ Configuration and findings:
 - Assertion check: naive keyword counting found 206 patients with severe acidosis; assertion-aware extraction found 132, so negation handling removed 74 false positives.
 
 Notes:
-- I added one cell before Part D (clearly labelled) that reports which note each concept appears in and how enriched it is by outcome. That timing evidence is what the D2 answer argues from, rather than relying on the importance plot alone.
+- I added one cell before Part D (clearly labeled) that reports which note each concept appears in and how enriched it is by outcome. That timing evidence is what the D2 answer argues from, rather than relying on the importance plot alone.
 - Nothing failed to run.
+
+## Module 10: Medical imaging AI - build it, then break it
+
+**Name:** Rakesh Vayigandla.
+**My confounder:** a **stain / scanner colour cast** - a global per-channel gain plus gamma shift applied to every tumour tile, standing in for slides processed at a different laboratory or on a different scanner.
+**Anything that did not run:** nothing failed. One deviation from the provided setup: **no `pathmnist_tumour_vs_normal_subset.npz` was posted on Canvas**, so the notebook uses the starter's own documented fallback and downloads PathMNIST at `DL_SIZE=64`, rebuilding the same 600/400/600 subset locally. Tiles are therefore 64 px upscaled to 128 px where the provided Notebook 2 used native 128 px, which is why accuracies land near but not exactly on its figures.
+
+- `module10/BIOT6900_Module10_Assignment.ipynb`: the graded notebook (Parts A-E). Runs top to bottom with Restart & Run All, ~10 min on a laptop CPU, no GPU.
+- `module10/Module10_Report.pdf`: the 4-page report (`Module10_Report.md` is the editable source).
+- `module10/figures/`: figures exported from the notebook run.
+- `module10/BIOT6900_Module10_Toy_MedNIST.ipynb`: the Part I toy lab notebook.
+
+There was **no starter notebook on Canvas** for this lab, so per the assignment ("start from Notebook 2 as your pipeline template, or the provided starter notebook") this notebook was written from scratch using the provided `BIOT6900_Module10_Real_Pathology_executed.ipynb` as the template. Reused from it: the ImageNet preprocessing, `TileDataset`, the training loop, the Grad-CAM setup including the `minmax_keep_high` fix, and the hand-built occlusion map. New here: the colour-cast confounder, the severity calibration against the control, the dose-response experiment, and all interpretation.
+
+Headline result - **a model with perfect validation accuracy that is a coin flip on honest data:**
+
+| | clean model | confounded model (s=1.0) |
+|---|---|---|
+| validation accuracy | 0.968 | **1.000** |
+| accuracy on clean test data | **0.950** | **0.583** |
+| tumour recall with cast / without | 0.953 / 0.943 | 1.000 / **0.167** |
+| normal tiles flipped to "tumour" by the cast | **5.0%** (the control) | **81.7%** |
+
+The clean control is what makes this proof rather than suspicion: shown the identical cast images it flips only 5.0%, which rules out "any unfamiliar input confuses any network" - the objection that invalidated the dark-edge-band attempt in Notebook 2. A dose-response check at s=2.0 strengthens every reliance measure (recall without cast falls to 0.023, flip rate rises to 97.0%) while the control stays flat at 4.7%.
+
+**The finding worth the most:** Grad-CAM and occlusion **did not catch this confounder.** Because the cast is global rather than a local mark, there is no location for a spatial map to point at. The maps do change (Grad-CAM correlation before vs after the cast is only +0.089, occlusion -0.014) but they move from tissue to other tissue and never indicate the cause. A reviewer applying the checklist's "is the heat on plausible morphology?" would pass a model scoring 0.583. What caught it were the two checks that require perturbing the input and re-measuring: stain robustness and the clean control.
+
+`module10/data/` (MedNIST, the PathMNIST download and the rebuilt subset) is not committed; the notebook rebuilds it.
+
