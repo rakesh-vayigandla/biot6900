@@ -17,6 +17,7 @@ module8/   single-cell and spatial omics: HER2/ERBB2 in breast cancer
 module9/   clinical NLP: signal vs leakage (DKA)
 module10/  medical imaging AI: build it, then break it (PathMNIST)
 portfolio1/ Portfolio Deliverable 1: T2D multi-omics target discovery package (Labs 2-4)
+portfolio2/ Portfolio Deliverable 2: T2D genomics and precision medicine case study (Labs 5-8)
 ```
 
 ## Module 1
@@ -137,6 +138,23 @@ Notes / what didn't work - **the provided starter does not run on a current pack
 To reproduce: `OMP_NUM_THREADS=1 jupyter nbconvert --to notebook --execute --inplace BIOT6900_Module8_Assignment_Starter.ipynb` from `module8/`.
 
 Other changes, all disclosed: `TARGET` was set to `ERBB2` from the template's `EPCAM` (the template line says to choose); the 2.3 TODO cell also scores canonical tumor/stroma/immune marker panels per domain, since that TODO asks to relate the domains to those regions; and the extra labelling cell described above. The 22 markdown cells are the provided ones with the six interpretation answers filled in. `module8/data/` (Census cache and the Visium download) is not committed.
+
+## Portfolio Deliverable 2: Genomics and precision medicine case study
+
+Disease: type 2 diabetes, the same thread as Modules 2-4, 7 and Portfolio 1. An 8-page synthesis of Labs 5-8 built around the Part I targets (LPL, CSF1, IL17RB, CTSZ), ending in a precision-medicine recommendation and a validation plan for the top novel finding, TNFRSF11A.
+
+- `portfolio2/Portfolio2_T2D_Precision_Medicine_Case_Study.pdf`: the case study (`.md` is the editable source).
+- `portfolio2/figures/`: the six report figures, numbered in document order.
+- `portfolio2/report.css`: the stylesheet used to build the PDF.
+
+**No new analysis.** Every number comes from an already-committed lab output. Figures 1 and 2 were re-plotted for this report from `module7/biomarker_ranking.csv` and `module5/pgx_classified_CYP2C19.csv`; Figures 3 to 6 are the Lab 6, 7 and 8 figures as generated.
+
+To rebuild the PDF: `pandoc Portfolio2_T2D_Precision_Medicine_Case_Study.md -f gfm+implicit_figures -t html5 --standalone -V document-css=false -o tmp.html`, inject `report.css` before `</head>`, then print with headless Chrome. The `-V document-css=false` flag matters: pandoc's default template sets `@media print { body { font-size: 12pt } }`, which silently overrides the stylesheet and makes the page count unresponsive to typography.
+
+Notes on scope, all stated in the case study itself:
+- **Lab 5 analysed CYP2C19, not a Part I target**, because I was not on the gene allocation list. Section 2 frames it as pharmacogenomics for a T2D patient via clopidogrel response, which is a claim about co-medication rather than about diabetes genetics.
+- **Lab 8 analysed breast cancer**, because the CELLxGENE Census query and the Visium section were fixed by the assignment. Section 5 presents it as a method whose conclusion transfers while its tissue does not, and states that it provides no cell-type evidence about any T2D target.
+- **Lab 6's graded phenotype is simulated**, so its AUC and calibration numbers are illustrative. The ancestry conclusion is carried by the real T2D scores in `module6/t2d_extra/` (PGS003733 and PGS003735), which report distribution only because 1000 Genomes has no T2D phenotype.
 
 ## Module 9: Clinical NLP, signal vs leakage
 Disease: **diabetic ketoacidosis (DKA)**, an acute complication of the type 2 diabetes thread from Modules 2-7. All patients and notes are synthetic, generated inside the notebook from my configuration (`SEED = 2020300`, my student ID).

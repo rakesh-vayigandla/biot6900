@@ -1,0 +1,29 @@
+@page { size: Letter; margin: 0.5in 0.62in; }
+html { font-size: 9.3pt; background:#fff; }
+body { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:9.3pt; line-height:1.25;
+  color:#111; max-width:none; margin:0; padding:0; hyphens:auto; }
+h1 { font-size:1.5em; margin:0 0 .08em 0; line-height:1.18; }
+h2 { font-size:1.12em; margin:.9em 0 .28em 0; padding-bottom:.09em; border-bottom:1.3px solid #333; page-break-after:avoid; }
+h3 { font-size:1.0em; margin:.66em 0 .2em 0; page-break-after:avoid; }
+p { margin:.33em 0; text-align:justify; }
+ul, ol { margin:.3em 0 .3em 1.05em; padding-left:.5em; }
+li { margin:.13em 0; }
+table { border-collapse:collapse; width:100%; margin:.42em 0; font-size:.855em; page-break-inside:avoid; }
+th, td { border:1px solid #bbb; padding:2.3px 5px; text-align:left; vertical-align:top; }
+th { background:#eee; font-weight:600; }
+tr:nth-child(even) td { background:#fafafa; }
+figure { margin:.45em 0 .5em 0; page-break-inside:avoid; }
+img { max-width:100%; max-height:1.9in; display:block; margin:.1em auto; }
+figcaption { font-size:.82em; color:#333; text-align:justify; margin:.18em .25em 0 .25em; line-height:1.22; }
+blockquote { margin:.38em 0; padding:.26em .7em; border-left:3px solid #555; background:#f4f4f4; }
+pre { background:#f4f4f4; border-left:3px solid #777; padding:.3em .6em; margin:.4em 0;
+  font-size:.78em; line-height:1.2; overflow-x:hidden; white-space:pre-wrap; page-break-inside:avoid; }
+code { font-family:"SF Mono",Menlo,monospace; font-size:.86em; background:#f0f0f0; padding:0 2px; border-radius:2px; }
+pre code { background:none; font-size:1em; }
+hr { border:none; border-top:1px solid #ccc; margin:.5em 0; }
+img[src*="knowledge_graph"] { max-height:3.3in; }
+img[src*="singlecell"] { max-height:2.05in; }
+img[src*="knowledge_graph"] { max-height:3.6in; }
+img[src*="singlecell"] { max-height:2.3in; }
+strong { font-weight:650; }
+#refs p, h2#references + p { font-size:.86em; }
